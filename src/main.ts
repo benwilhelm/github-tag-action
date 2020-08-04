@@ -81,6 +81,7 @@ async function run() {
           `git log ${tag}..HEAD --pretty=format:'%s%n%b${HASH_SEPARATOR}%h${SEPARATOR}' --abbrev-commit`
         )
       ).stdout.trim();
+      tag = tag.replace(tagPrefix, '');
 
       core.debug(`Setting previous_tag to: ${tag}`);
       core.setOutput("previous_tag", tag);
