@@ -75,7 +75,7 @@ async function run() {
       const previousTagSha = (
         await exec(`git rev-list --tags=${tagPrefix}* --topo-order --max-count=1`)
       ).stdout.trim();
-      tag = (await exec(`git describe --tags ${previousTagSha}`)).stdout.trim();
+      tag = (await exec(`git describe --tags --match="${tagPrefix}*" ${previousTagSha}`)).stdout.trim();
       logs = (
         await exec(
           `git log ${tag}..HEAD --pretty=format:'%s%n%b${HASH_SEPARATOR}%h${SEPARATOR}' --abbrev-commit`
